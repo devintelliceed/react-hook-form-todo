@@ -1,24 +1,24 @@
 
 import _ from 'lodash';
+import { memo, useCallback } from "react";
 
-export default function UserList({ list, handleSetValues, handleRemove }) {
-
+const UserList = memo( function UserList({ list, handleSetValues, handleRemove }) {
     return _.isEmpty(list)
         ? <header><h2>You have no applicant</h2></header>
         : <div>
             <header><h2>You have {list.length} applicants</h2></header>
             {list.map(applicant => <User applicant={applicant} key={applicant.id} handleSetValues={handleSetValues} handleRemove={handleRemove} />)}
         </div>
-};
+});
 
-const User = ({ applicant, handleSetValues, handleRemove }) => {
+const User = memo( function User({ applicant, handleSetValues, handleRemove }) {
     let title;
     if (applicant.gender) {
         title = applicant.gender === "Man" ? "Mr." : "Mrs.";
     }
 
-    const handleEdit = () => handleSetValues(applicant);
-    const remove = () => handleRemove(applicant);
+    const handleEdit = useCallback(() => handleSetValues(applicant), [handleSetValues, applicant]);
+    const remove = useCallback(() => handleRemove(applicant), [handleRemove, applicant]);
 
     return <>
         <div className="user-list">
@@ -39,4 +39,6 @@ const User = ({ applicant, handleSetValues, handleRemove }) => {
         </div>
         <hr/>
     </>
-}
+});
+
+export default UserList;

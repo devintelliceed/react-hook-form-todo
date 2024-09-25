@@ -1,45 +1,12 @@
 
-import { useState } from 'react'
+import './App.css';
 
-import './App.css'
-import UserForm from './components/user-form.jsx'
-import UserList from "./components/user-list.jsx";
+import { useState } from 'react';
 
-const mockedPeople = [
-    {
-        id: 1,
-        firstName: "Bruce",
-        lastName: "Wayne",
-        gender: "Man",
-        qualification: "Senior",
-        phoneNumber: "123456789",
-        email: "batman@test.test",
-        comment: "i`m not Batman",
-        employment: ['Part-time'],
-    },
-    {
-        id: 2,
-        firstName: "Natasha",
-        lastName: "Romanoff",
-        gender: "Woman",
-        qualification: "Middle",
-        phoneNumber: "987654321",
-        email: "b_widow@test.test",
-        comment: "i`m not Spy Black Widow",
-        employment: ['Part-time', 'Full-time', 'Over-time'],
-    },
-];
+import { mockedPeople, defaultValues} from "./constants/mocked-form-values.js";
 
-const defaultValues = {
-    email: "",
-    gender: "",
-    comment: "",
-    lastName: "",
-    firstName: "",
-    employment: [],
-    phoneNumber: "",
-    qualification: "",
-};
+import UserForm from './layout/user-form.jsx';
+import UserList from "./layout/user-list.jsx";
 
 function App() {
   const [list, setList] = useState(mockedPeople);
