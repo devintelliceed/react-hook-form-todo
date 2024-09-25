@@ -1,17 +1,16 @@
-import { memo } from "react";
+
 import {ErrorMessage} from "@hookform/error-message";
 
 export const Input =  ({ fieldName, label, register, errors, required, type, validationSchema, isTextArea, ...attr }) => {
     if (isTextArea) {
         return <>
             <label htmlFor={fieldName}>
-                {label}
-                {required && <span className='required'>*</span>}
+                {label}{required && <span className='required'>*</span>}
             </label>
             <textarea
-                id={fieldName}
-                name={fieldName}
                 {...register(fieldName, validationSchema)}
+                name={fieldName}
+                id={fieldName}
                 {...attr}
             />
             <ErrorMessage errors={errors} name={fieldName} render={({message}) => <p>{message}</p>}/>
@@ -19,14 +18,13 @@ export const Input =  ({ fieldName, label, register, errors, required, type, val
     }
     return <>
         <label htmlFor={fieldName}>
-            {label}
-            {required && <span className='required'>*</span>}
+            {label}{required && <span className='required'>*</span>}
         </label>
         <input
-            type={type}
-            id={fieldName}
-            name={fieldName}
             {...register(fieldName, validationSchema)}
+            name={fieldName}
+            id={fieldName}
+            type={type}
             {...attr}
         />
         <ErrorMessage errors={errors} name={fieldName} render={({message}) => <p>{message}</p>}/>
